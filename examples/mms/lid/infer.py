@@ -125,7 +125,9 @@ if __name__ == "__main__":
     # Setup task
     # task = tasks.setup_task(args)
     use_cuda = not args.cpu
-
+    if use_cuda and not torch.cuda.is_available():
+        use_cuda = False
+    print(f"use_cuda:{use_cuda}")
     # Load model & task
     print("| loading model from {}".format(args.path))
     arg_overrides = {
